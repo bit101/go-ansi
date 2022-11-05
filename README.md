@@ -39,7 +39,7 @@ ansi.SetBold(bold bool)
 
 Affects whether text will be rendered in bold or regular. This setting will remain active until it is changed or reset.
 
-### Set Underline
+### Set underline
 
 ```
 ansi.SetUnderline(underline bool)
@@ -47,10 +47,18 @@ ansi.SetUnderline(underline bool)
 
 Affects whether text will be rendered underlined or not. This setting will remain active until it is changed or reset.
 
+### Set reversed
+
+```
+ansi.SetReversed(reversed bool)
+```
+
+Affects whether text will be rendered with foreground and background reversed. This setting will remain active until it is changed or reset.
+
 ### Set all properties
 
 ```
-ansi.SetAll(fg ansiColor, bg ansiColor, bold bool, underline bool)
+ansi.SetAll(fg ansiColor, bg ansiColor, bold bool, underline, reversed bool)
 ```
 
 Sets all of the above properties in one shot.
@@ -65,16 +73,15 @@ Sets all of the above properties to their default values.
 
 ## Print functions
 
-All of the below are "one-shot" functions. They can only be used to set ONE of the following: foreground color, bold, underline.
+All of the below are "one-shot" functions. They can only be used to set ONE of the following: foreground color, bold, underline, reversed.
 
 The properties selected will only be in effect for the single print call. After the call, all properties will revert to what they were set to with the above functions.
 
-In addition to passing an actual color, such as `ansi.Red` or `ansi.Green`, these functions will accept `ansi.Bold` and `ansi.Underline`.
+In addition to passing an actual color, such as `ansi.Red` or `ansi.Green`, these functions will accept `ansi.Bold` and `ansi.Underline`, ansi.Reversed.
 
-To be clear, you can set the foreground color OR bold OR underline with the below functions. If you want to set the text to be bold AND green for example, you'll have to use the above functions and then call `fmt.Print*`
+To be clear, you can set the foreground color OR bold OR underline OR reversed with the below functions. If you want to set the text to be bold AND green for example, you'll have to use the above functions and then call `fmt.Print*`
 
 Setting the background color is not supported with these methods.
-
 
 ### Print
 
@@ -151,6 +158,8 @@ The following functions provide some ability to move the cursor to different pos
 ```
 ansi.ClearLine()
 ansi.ClearScreen()
+ansi.Backspace(n int)
+ansi.Tab()
 ansi.CarriageReturn()
 ansi.NewLine()
 ansi.MoveTo(x, y int)
