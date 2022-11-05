@@ -4,6 +4,7 @@ import "fmt"
 
 // Movement / Clear
 func ClearScreen() {
+	fmt.Print("\033[H\r")
 	fmt.Print("\033[2J\r")
 }
 

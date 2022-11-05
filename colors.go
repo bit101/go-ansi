@@ -32,6 +32,8 @@ var (
 	NotBold      ansiColor = ansiColor{0, 22, 22}
 	Underline    ansiColor = ansiColor{0, 4, 4}
 	NotUnderline ansiColor = ansiColor{0, 24, 24}
+	Reversed     ansiColor = ansiColor{0, 7, 7}
+	NotReversed  ansiColor = ansiColor{0, 27, 27}
 )
 
 var (
@@ -39,34 +41,45 @@ var (
 	bgColor     ansiColor = Default
 	isBold      bool      = false
 	isUnderline bool      = false
+	isReversed  bool      = false
 )
 
 func SetFg(fg ansiColor) {
-	SetAll(fg, bgColor, isBold, isUnderline)
+	fgColor = fg
+	applySettings()
 }
 
 func SetBg(bg ansiColor) {
-	SetAll(fgColor, bg, isBold, isUnderline)
+	bgColor = bg
+	applySettings()
 }
 
 func SetBold(bold bool) {
-	SetAll(fgColor, bgColor, bold, isUnderline)
+	isBold = bold
+	applySettings()
 }
 
 func SetUnderline(underline bool) {
-	SetAll(fgColor, bgColor, isBold, underline)
-}
-
-func SetAll(fg, bg ansiColor, bold, underline bool) {
-	fgColor = fg
-	bgColor = bg
-	isBold = bold
 	isUnderline = underline
 	applySettings()
 }
 
+func SetReversed(reversed bool) {
+	isReversed = reversed
+	applySettings()
+}
+
+func SetAll(fg, bg ansiColor, bold, underline, reversed bool) {
+	fgColor = fg
+	bgColor = bg
+	isBold = bold
+	isUnderline = underline
+	isReversed = reversed
+	applySettings()
+}
+
 func ResetAll() {
-	SetAll(Default, Default, false, false)
+	SetAll(Default, Default, false, false, false)
 	fmt.Print("\033[K")
 }
 
@@ -79,7 +92,11 @@ func applySettings() {
 	if isUnderline {
 		u = 4
 	}
-	fmt.Printf("\033[38;5;%d;%d;48;5;%d;%d;%d;%dm", fgColor.mod, fgColor.fg, bgColor.mod, bgColor.bg, b, u)
+	r := 27
+	if isReversed {
+		r = 7
+	}
+	fmt.Printf("\033[38;5;%d;%d;48;5;%d;%d;%d;%d;%dm", fgColor.mod, fgColor.fg, bgColor.mod, bgColor.bg, b, u, r)
 }
 
 func Print(col ansiColor, s ...any) {
