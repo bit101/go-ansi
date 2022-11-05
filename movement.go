@@ -4,11 +4,11 @@ import "fmt"
 
 // Movement / Clear
 func ClearScreen() {
-	fmt.Print("\033[2J")
+	fmt.Print("\033[2J\r")
 }
 
 func ClearLine() {
-	fmt.Print("\033[2K")
+	fmt.Print("\033[2K\r")
 }
 
 func Backspace(n int) {
