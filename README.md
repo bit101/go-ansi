@@ -149,9 +149,10 @@ ansi.NotUnderline
 The following functions provide some ability to move the cursor to different positions in the shell and clear content from the screen. They pretty much do exactly what you would expect.
 
 ```
+ansi.ClearLine()
 ansi.ClearScreen()
 ansi.CarriageReturn()
-ansi.ClearLine()
+ansi.NewLine()
 ansi.MoveTo(x, y int)
 ansi.MoveUp(n int)
 ansi.MoveDown(n int)
