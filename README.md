@@ -65,11 +65,13 @@ Sets all of the above properties to their default values.
 
 ## Print functions
 
-All of the below are "one-shot" function. They can only be used to set ONE of the following: foreground color, bold, underline.
+All of the below are "one-shot" functions. They can only be used to set ONE of the following: foreground color, bold, underline.
 
-The properties selected will only be in effect for the single print call. After the call, all properties will revert to what they were set to with the above function calls.
+The properties selected will only be in effect for the single print call. After the call, all properties will revert to what they were set to with the above functions.
 
 In addition to passing an actual color, such as `ansi.Red` or `ansi.Green`, these functions will accept `ansi.Bold` and `ansi.Underline`.
+
+To be clear, you can set the foreground color OR bold OR underline with the below functions. If you want to set the text to be bold AND green for example, you'll have to use the above functions and then call `fmt.Print*`
 
 Setting the background color is not supported with these methods.
 
@@ -140,4 +142,19 @@ ansi.Bold
 ansi.NotBold
 ansi.Underline
 ansi.NotUnderline
+```
+
+## Movements and Clearing
+
+The following functions provide some ability to move the cursor to different positions in the shell and clear content from the screen. They pretty much do exactly what you would expect.
+
+```
+ansi.ClearScreen()
+ansi.CarriageReturn()
+ansi.ClearLine()
+ansi.MoveTo(x, y int)
+ansi.MoveUp(n int)
+ansi.MoveDown(n int)
+ansi.MoveRight(n int)
+ansi.MoveLeft(n int)
 ```
