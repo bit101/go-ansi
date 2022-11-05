@@ -168,3 +168,31 @@ ansi.MoveDown(n int)
 ansi.MoveRight(n int)
 ansi.MoveLeft(n int)
 ```
+
+## Known issues
+
+If underline, reversed or a background color is set and then unset and a print call forces a scroll, the style may incorrectly extend to the next line. The following code demonstrates this:
+
+```
+ansi.SetReversed(true)
+fmt.Println("reversed")
+ansi.SetReversed(false)
+fmt.Println("normal")
+```
+
+This is the result once the screen scrolls:
+
+![image issue](images/reversedissue.png)
+
+This is more of an underlying issue that is hard to fix within the library because it happens in `fmt.Println`. There is a fix in the library print methods though, so a workaround is to use them, like so:
+
+```
+ansi.SetReversed(true)
+fmt.Println("reversed")
+ansi.SetReversed(false)
+ansi.Println(ansi.Default, "normal")
+```
+
+The result:
+
+![image fixed](images/reversedfixed.png)
