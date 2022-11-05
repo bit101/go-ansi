@@ -7,12 +7,16 @@ func ClearScreen() {
 	fmt.Print("\033[2J")
 }
 
-func CarriageReturn() {
-	fmt.Printf("\r")
-}
-
 func ClearLine() {
 	fmt.Print("\033[2K")
+}
+
+func CarriageReturn() {
+	fmt.Print("\r")
+}
+
+func NewLine() {
+	fmt.Print("\n")
 }
 
 func MoveTo(x, y int) {
