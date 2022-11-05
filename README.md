@@ -1,6 +1,8 @@
 # go-ansi
 ANSI escape sequences for Golang
 
+![demo image](images/demo.png)
+
 ## Install:
 
 ```
