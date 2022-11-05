@@ -82,17 +82,17 @@ func applySettings() {
 	fmt.Printf("\033[38;5;%d;%d;48;5;%d;%d;%d;%dm", fgColor.mod, fgColor.fg, bgColor.mod, bgColor.bg, b, u)
 }
 
-func Print(col ansiColor, s any) {
+func Print(col ansiColor, s ...any) {
 	fmt.Print("\033[0m")
 	fmt.Printf("\033[%d;%dm", col.mod, col.fg)
-	fmt.Print(s)
+	fmt.Print(s...)
 	applySettings()
 }
 
-func Println(col ansiColor, s any) {
+func Println(col ansiColor, s ...any) {
 	fmt.Print("\033[0m")
 	fmt.Printf("\033[%d;%dm\033[K", col.mod, col.fg)
-	fmt.Println(s)
+	fmt.Println(s...)
 	applySettings()
 }
 

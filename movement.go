@@ -11,6 +11,16 @@ func ClearLine() {
 	fmt.Print("\033[2K")
 }
 
+func Backspace(n int) {
+	for i := 0; i < n; i++ {
+		fmt.Print("\b")
+	}
+}
+
+func Tab() {
+	fmt.Println("\t")
+}
+
 func CarriageReturn() {
 	fmt.Print("\r")
 }
