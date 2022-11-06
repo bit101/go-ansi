@@ -10,7 +10,34 @@ import (
 func main() {
 	// setFuncs()
 	// printFuncs()
-	moveFuncs()
+	// moveFuncs()
+	allColors()
+}
+
+func allColors() {
+	ansi.Println(ansi.Black, "black")
+	ansi.Println(ansi.BoldBlack, "black")
+
+	ansi.Println(ansi.Red, "red")
+	ansi.Println(ansi.BoldRed, "red")
+
+	ansi.Println(ansi.Green, "green")
+	ansi.Println(ansi.BoldGreen, "green")
+
+	ansi.Println(ansi.Yellow, "yellow")
+	ansi.Println(ansi.BoldYellow, "yellow")
+
+	ansi.Println(ansi.Blue, "blue")
+	ansi.Println(ansi.BoldBlue, "blue")
+
+	ansi.Println(ansi.Purple, "purple")
+	ansi.Println(ansi.BoldPurple, "purple")
+
+	ansi.Println(ansi.Cyan, "cyan")
+	ansi.Println(ansi.BoldCyan, "cyan")
+
+	ansi.Println(ansi.White, "white")
+	ansi.Println(ansi.BoldWhite, "white")
 }
 
 func setFuncs() {
