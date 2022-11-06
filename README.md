@@ -79,9 +79,9 @@ All of the below are "one-shot" functions. They can only be used to set ONE of t
 
 The properties selected will only be in effect for the single print call. After the call, all properties will revert to what they were set to with the above functions.
 
-In addition to passing an actual color, such as `ansi.Red` or `ansi.Green`, these functions will accept `ansi.Bold` and `ansi.Underline`, ansi.Reversed.
+In addition to passing an actual color, such as `ansi.Red` or `ansi.Green`, these functions will accept `ansi.Bold`, `ansi.Underline` and `ansi.Reversed`. If you use one of these three, the default color will be used.
 
-To be clear, you can set the foreground color OR bold OR underline OR reversed with the below functions. If you want to set the text to be bold AND green for example, you'll have to use the above functions and then call `fmt.Print*`
+If you use one of the bold colors, such as `ansi.BoldRed`, it has the effect of setting the color to red AND setting the bold flag to true.
 
 Setting the background color is not supported with these methods.
 
@@ -119,21 +119,21 @@ The following `ansiColor`s define actual colors. They can be used in `ansi.SetFg
 
 ```
 ansi.Black
-ansi.DarkGray
+ansi.BoldBlack
 ansi.Red
-ansi.LightRed
+ansi.BoldRed
 ansi.Green
-ansi.LightGreen
-ansi.Brown
+ansi.BoldGreen
 ansi.Yellow
+ansi.BoldYellow
 ansi.Blue
-ansi.LightBlue
+ansi.BoldBlue
 ansi.Purple
-ansi.LightPurple
+ansi.BoldPurple
 ansi.Cyan
-ansi.LightCyan
-ansi.LightGray
+ansi.BoldCyan
 ansi.White
+ansi.BoldWhite
 ```
 
 Another special color value is:
@@ -151,6 +151,31 @@ ansi.Bold
 ansi.NotBold
 ansi.Underline
 ansi.NotUnderline
+```
+
+### Note on bold colors
+
+If you choose one of the bold colors, such as `ansi.BoldGreen`, it has the effect of setting the color to green and bold to true. This is useful for the `ansi.Print*` functions. If you use a bold color in the `ansi.SetFg` function, it will set bold to true even if you previously called `ansi.SetBold(false)`. See the following:
+
+```
+ansi.SetBold(false)
+ansi.SetFg(ansi.BoldGreen)
+fmt.Println("this will be bold green")
+```
+
+The order of operations reversed has the opposite effect:
+
+```
+ansi.SetFg(ansi.BoldGreen)
+ansi.SetBold(false)
+fmt.Println("this will just be green")
+```
+
+When using the `ansi.SetAll` function, the bold version of the color will be ignored and the bold flag will be based solely on the bold flag that you passed in as the third parameter, as demonstrated below.
+
+```
+ansi.SetAll(ansi.BoldGreen, ansi.Default, false, false, false)
+fmt.Println("this will just be green")
 ```
 
 ## Movements and Clearing

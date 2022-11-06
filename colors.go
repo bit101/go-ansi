@@ -10,7 +10,7 @@ type ansiColor struct {
 
 var (
 	Black      ansiColor = ansiColor{0, 30}
-	BoldGray   ansiColor = ansiColor{1, 30}
+	BoldBlack  ansiColor = ansiColor{1, 30}
 	Red        ansiColor = ansiColor{0, 31}
 	BoldRed    ansiColor = ansiColor{1, 31}
 	Green      ansiColor = ansiColor{0, 32}
@@ -45,6 +45,9 @@ var (
 
 func SetFg(fg ansiColor) {
 	fgColor = fg
+	if fg.bold == 1 {
+		isBold = true
+	}
 	applySettings()
 }
 
@@ -95,7 +98,7 @@ func applySettings() {
 	if isReversed {
 		r = 7
 	}
-	fmt.Printf("\033[38;5;%d;48;5;%d;%d;%d;%dm", fgColor.value, bgColor.value, b, u, r)
+	fmt.Printf("\033[38;5;0;%d;48;5;0;%d;%d;%d;%dm", fgColor.value, bgColor.value+10, b, u, r)
 }
 
 func Print(col ansiColor, s ...any) {
