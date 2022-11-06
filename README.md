@@ -151,6 +151,8 @@ ansi.Bold
 ansi.NotBold
 ansi.Underline
 ansi.NotUnderline
+ansi.Reversed
+ansi.NotReversed
 ```
 
 ## Movements and Clearing
