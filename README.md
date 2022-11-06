@@ -79,7 +79,7 @@ All of the below are "one-shot" functions. They can only be used to set ONE of t
 
 The properties selected will only be in effect for the single print call. After the call, all properties will revert to what they were set to with the above functions.
 
-In addition to passing an actual color, such as `ansi.Red` or `ansi.Green`, these functions will accept `ansi.Bold` and `ansi.Underline`, ansi.Reversed.
+In addition to passing an actual color, such as `ansi.Red` or `ansi.Green`, these functions will accept `ansi.Bold` and `ansi.Underline`, `ansi.Reversed`.
 
 To be clear, you can set the foreground color OR bold OR underline OR reversed with the below functions. If you want to set the text to be bold AND green for example, you'll have to use the above functions and then call `fmt.Print*`
 
