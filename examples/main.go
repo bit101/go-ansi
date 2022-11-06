@@ -11,10 +11,12 @@ func main() {
 	// setFuncs()
 	// printFuncs()
 	// moveFuncs()
-	allColors()
+	// allColors()
+	mixFuncs()
 }
 
 func allColors() {
+	// just printing all the colors
 	ansi.Println(ansi.Black, "black")
 	ansi.Println(ansi.BoldBlack, "black")
 
@@ -41,6 +43,7 @@ func allColors() {
 }
 
 func setFuncs() {
+	// build up some styles
 	ansi.SetFg(ansi.Green)
 	fmt.Println("green")
 	ansi.SetBold(true)
@@ -49,14 +52,19 @@ func setFuncs() {
 	fmt.Println("green bold reversed")
 	ansi.SetUnderline(true)
 	fmt.Println("green bold reversed underlined")
+
+	// reset all styles
 	ansi.ResetAll()
 	fmt.Println("back to normal")
+
+	// set some more
 	ansi.SetBg(ansi.Red)
 	ansi.SetFg(ansi.Yellow)
 	fmt.Println("yellow on red")
 }
 
 func printFuncs() {
+	// ansi.Print* functions are one shot. not sticky.
 	ansi.Println(ansi.Red, "I am red")
 	fmt.Println("I am normal")
 	ansi.Println(ansi.Bold, "I am bold")
@@ -89,4 +97,16 @@ func moveFuncs() {
 	time.Sleep(1 * time.Second)
 	ansi.MoveDown(3)
 	ansi.CarriageReturn()
+}
+
+func mixFuncs() {
+	ansi.SetFg(ansi.Red)
+	ansi.SetBold(true)
+	fmt.Println("red bold")
+
+	// ansi.Print* disregards set properties
+	ansi.Println(ansi.Green, "green normal")
+
+	// but they are still in play for fmt.Print*
+	fmt.Println("still red bold")
 }

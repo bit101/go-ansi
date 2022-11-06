@@ -4,35 +4,35 @@ import "fmt"
 
 // Colors
 type ansiColor struct {
-	bold  int
+	bold  bool
 	value int
 }
 
 var (
-	Black      ansiColor = ansiColor{0, 30}
-	BoldBlack  ansiColor = ansiColor{1, 30}
-	Red        ansiColor = ansiColor{0, 31}
-	BoldRed    ansiColor = ansiColor{1, 31}
-	Green      ansiColor = ansiColor{0, 32}
-	BoldGreen  ansiColor = ansiColor{1, 32}
-	Yellow     ansiColor = ansiColor{0, 33}
-	BoldYellow ansiColor = ansiColor{1, 33}
-	Blue       ansiColor = ansiColor{0, 34}
-	BoldBlue   ansiColor = ansiColor{1, 34}
-	Purple     ansiColor = ansiColor{0, 35}
-	BoldPurple ansiColor = ansiColor{1, 35}
-	Cyan       ansiColor = ansiColor{0, 36}
-	BoldCyan   ansiColor = ansiColor{1, 36}
-	White      ansiColor = ansiColor{0, 37}
-	BoldWhite  ansiColor = ansiColor{1, 37}
-	Default    ansiColor = ansiColor{0, 39}
+	Black      ansiColor = ansiColor{false, 30}
+	BoldBlack  ansiColor = ansiColor{true, 30}
+	Red        ansiColor = ansiColor{false, 31}
+	BoldRed    ansiColor = ansiColor{true, 31}
+	Green      ansiColor = ansiColor{false, 32}
+	BoldGreen  ansiColor = ansiColor{true, 32}
+	Yellow     ansiColor = ansiColor{false, 33}
+	BoldYellow ansiColor = ansiColor{true, 33}
+	Blue       ansiColor = ansiColor{false, 34}
+	BoldBlue   ansiColor = ansiColor{true, 34}
+	Purple     ansiColor = ansiColor{false, 35}
+	BoldPurple ansiColor = ansiColor{true, 35}
+	Cyan       ansiColor = ansiColor{false, 36}
+	BoldCyan   ansiColor = ansiColor{true, 36}
+	White      ansiColor = ansiColor{false, 37}
+	BoldWhite  ansiColor = ansiColor{true, 37}
+	Default    ansiColor = ansiColor{false, 39}
 
-	Bold         ansiColor = ansiColor{0, 1}
-	NotBold      ansiColor = ansiColor{0, 22}
-	Underline    ansiColor = ansiColor{0, 4}
-	NotUnderline ansiColor = ansiColor{0, 24}
-	Reversed     ansiColor = ansiColor{0, 7}
-	NotReversed  ansiColor = ansiColor{0, 27}
+	Bold         ansiColor = ansiColor{false, 1}
+	NotBold      ansiColor = ansiColor{false, 22}
+	Underline    ansiColor = ansiColor{false, 4}
+	NotUnderline ansiColor = ansiColor{false, 24}
+	Reversed     ansiColor = ansiColor{false, 7}
+	NotReversed  ansiColor = ansiColor{false, 27}
 )
 
 var (
@@ -45,7 +45,7 @@ var (
 
 func SetFg(fg ansiColor) {
 	fgColor = fg
-	if fg.bold == 1 {
+	if fg.bold {
 		isBold = true
 	}
 	applySettings()
@@ -98,26 +98,32 @@ func applySettings() {
 	if isReversed {
 		r = 7
 	}
-	fmt.Printf("\033[38;5;0;%d;48;5;0;%d;%d;%d;%dm", fgColor.value, bgColor.value+10, b, u, r)
+	fmt.Printf("\033[0;%d;%d;%d;%d;%dm", fgColor.value, bgColor.value+10, b, u, r)
 }
 
 func Print(col ansiColor, s ...any) {
-	fmt.Print("\033[0m")
-	fmt.Printf("\033[%d;%dm", col.bold, col.value)
+	fmt.Printf("\033[0;%dm", col.value)
+	if col.bold {
+		fmt.Printf("\033[1m")
+	}
 	fmt.Print(s...)
 	applySettings()
 }
 
 func Println(col ansiColor, s ...any) {
-	fmt.Print("\033[0m")
-	fmt.Printf("\033[%d;%dm\033[K", col.bold, col.value)
+	fmt.Printf("\033[0;%dm", col.value)
+	if col.bold {
+		fmt.Printf("\033[1m")
+	}
 	fmt.Println(s...)
 	applySettings()
 }
 
 func Printf(col ansiColor, s string, args ...any) {
-	fmt.Print("\033[0m")
-	fmt.Printf("\033[%d;%dm", col.bold, col.value)
+	fmt.Printf("\033[0;%dm", col.value)
+	if col.bold {
+		fmt.Printf("\033[1m")
+	}
 	fmt.Printf(s, args...)
 	applySettings()
 }
