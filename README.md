@@ -60,7 +60,7 @@ Affects whether text will be rendered with foreground and background reversed. T
 ### Set all properties
 
 ```
-ansi.SetAll(fg ansiColor, bg ansiColor, bold bool, underline, reversed bool)
+ansi.SetAll(fg ansiColor, bg ansiColor, bold bool, underline bool, reversed bool)
 ```
 
 Sets all of the above properties in one shot.
@@ -104,7 +104,7 @@ Behaves exactly like `fmt.Println` but takes an `ansiColor` as a first argument.
 ### Print formatted
 
 ```
-ansi.Printf(color ansiColor, message any, args ...any)
+ansi.Printf(color ansiColor, formatStr string, args ...any)
 ```
 
 Behaves exactly like `fmt.Printf` but takes an `ansiColor` as a first argument.
@@ -151,6 +151,8 @@ ansi.Bold
 ansi.NotBold
 ansi.Underline
 ansi.NotUnderline
+ansi.Reversed
+ansi.NotReversed
 ```
 
 ### Note on bold colors
