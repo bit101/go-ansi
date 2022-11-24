@@ -70,10 +70,12 @@ func (l *List) getInput() {
 		c := ReadBytes(1)[0]
 		// fmt.Println(c)
 		switch c {
+
 		case 106: // j or down
 			l.index++
 			l.correctIndex()
 			l.display()
+
 		case 107: // k or up
 			l.index--
 			l.correctIndex()
@@ -81,10 +83,12 @@ func (l *List) getInput() {
 
 		case 27:
 			l.handleEscapes()
+
 		case 48, 49, 50, 51, 52, 53, 54, 55, 56, 57: // 0-9
 			if l.ShowNumbers && l.checkChoice(c) {
 				l.display()
 			}
+
 		case 10:
 			return
 		}
