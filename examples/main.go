@@ -12,10 +12,8 @@ func main() {
 	// setFuncs()
 	// printFuncs()
 	// moveFuncs()
-	// allColors()
+	allColors()
 	// mixFuncs()
-	doInput()
-	// doList()
 }
 
 func allColors() {
@@ -112,44 +110,4 @@ func mixFuncs() {
 
 	// but they are still in play for fmt.Print*
 	fmt.Println("still red bold")
-}
-
-func doInput() {
-	input := ansi.NewInput("Name", "keith")
-	name := input.Run()
-	fmt.Printf("name is %s\n", name)
-	fmt.Printf("len is %d\n\n\n\n", len(name))
-
-	var options = []string{
-		"one",
-		"two",
-		"three",
-		"four",
-		"five",
-		"Exit",
-	}
-	confirm := ansi.NewConfirm("Show numbers?")
-	showNumbers := confirm.Run()
-
-	fmt.Println("Make a decision:")
-	list := ansi.NewList(options)
-	list.ShowNumbers = showNumbers
-	index, result := list.Run()
-	fmt.Printf("You chose %d, which is option %s\n\n", index+1, result)
-
-}
-
-func doList() {
-	var options = []string{
-		"one",
-		"two",
-		"three",
-		"four",
-		"five",
-		"Exit",
-	}
-	fmt.Println("Make a decision:")
-	list := ansi.NewList(options)
-	index, result := list.Run()
-	fmt.Printf("You chose %d, which is option %s\n\n", index+1, result)
 }
