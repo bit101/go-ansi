@@ -111,7 +111,7 @@ Behaves exactly like `fmt.Printf` but takes an `ansiColor` as a first argument.
 
 ### Fprint functions
 ```
-ansi.Fprint(output io.Writer, message ...any)
+ansi.Fprint(output io.Writer, color ansiColor, message ...any)
 ansi.Fprintln(output io.Writer, color ansiColor, message ...any)
 ansi.Fprintf(output io.Writer, color ansiColor, formatStr string, args ...any)
 ```
