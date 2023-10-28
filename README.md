@@ -209,6 +209,7 @@ ansi.Save() // saves position
 ansi.Restore() // restores position
 ansi.SetScrollRegion(start, end int)
 ansi.ResetScrollRegion()
+ansi.TermSize() // returns x and y int size of terminal
 ```
 
 ## Known issues

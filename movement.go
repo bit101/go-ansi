@@ -1,7 +1,11 @@
 // Package ansi allows for advanced terminal text manipulation.
 package ansi
 
-import "fmt"
+import (
+	"fmt"
+
+	"golang.org/x/term"
+)
 
 // ClearScreen clears the screen.
 func ClearScreen() {
@@ -93,4 +97,10 @@ func SetScrollRegion(start, end int) {
 // ResetScrollRegion resets the scroll region.
 func ResetScrollRegion() {
 	fmt.Print("\033[r")
+}
+
+// TermSize returns the size of the terminal.
+func TermSize() (int, int) {
+	x, y, _ := term.GetSize(0)
+	return x, y
 }
