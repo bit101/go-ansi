@@ -109,6 +109,15 @@ ansi.Printf(color ansiColor, formatStr string, args ...any)
 
 Behaves exactly like `fmt.Printf` but takes an `ansiColor` as a first argument.
 
+### Fprint functions
+```
+ansi.Fprint(output io.Writer, message ...any)
+ansi.Fprintln(output io.Writer, color ansiColor, message ...any)
+ansi.Fprintf(output io.Writer, color ansiColor, formatStr string, args ...any)
+```
+
+Exactly like the other print functions, but print to the `io.Writer` of your choice.
+
 ## The ansiColor type
 
 `ansiColor`s are a set of predefined values that encapsule text properties - mostly colors.
@@ -196,6 +205,10 @@ ansi.MoveUp(n int)
 ansi.MoveDown(n int)
 ansi.MoveRight(n int)
 ansi.MoveLeft(n int)
+ansi.Save() // saves position
+ansi.Restore() // restores position
+ansi.SetScrollRegion(start, end int)
+ansi.ResetScrollRegion()
 ```
 
 ## Known issues
