@@ -2,6 +2,7 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"time"
 
@@ -12,8 +13,9 @@ func main() {
 	// setFuncs()
 	// printFuncs()
 	// moveFuncs()
-	allColors()
+	// allColors()
 	// mixFuncs()
+	fprint()
 }
 
 func allColors() {
@@ -110,4 +112,21 @@ func mixFuncs() {
 
 	// but they are still in play for fmt.Print*
 	fmt.Println("still red bold")
+}
+
+func fprint() {
+	// print to a buffer to demonstrate an alternate output.
+	buf := new(bytes.Buffer)
+
+	ansi.Fprint(buf, ansi.Red, "Hello red")
+	fmt.Println(buf.String())
+
+	buf.Reset()
+	ansi.Fprintln(buf, ansi.Yellow, "Hello yellow")
+	fmt.Print(buf.String())
+
+	buf.Reset()
+	ansi.Fprintf(buf, ansi.Green, "Hello %s\n", "green")
+	fmt.Print(buf.String())
+
 }

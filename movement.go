@@ -74,3 +74,23 @@ func GetPos() (int, int) {
 	fmt.Scanf("\033[%d;%dR", &y, &x)
 	return x, y
 }
+
+// Save saves the current cursor position.
+func Save() {
+	fmt.Print("\0337")
+}
+
+// Restore restores the cursor to the last saved position.
+func Restore() {
+	fmt.Print("\0338")
+}
+
+// SetScrollRegion sets the start and end lines that the screen will scroll within.
+func SetScrollRegion(start, end int) {
+	fmt.Printf("\033[%d;%dr", start, end)
+}
+
+// ResetScrollRegion resets the scroll region.
+func ResetScrollRegion() {
+	fmt.Print("\033[r")
+}

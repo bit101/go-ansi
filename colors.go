@@ -1,7 +1,10 @@
 // Package ansi allows for advanced terminal text manipulation.
 package ansi
 
-import "fmt"
+import (
+	"fmt"
+	"io"
+)
 
 type ansiColor struct {
 	bold  bool
@@ -158,5 +161,35 @@ func Printf(col ansiColor, s string, args ...any) {
 		fmt.Printf("\033[1m")
 	}
 	fmt.Printf(s, args...)
+	applySettings()
+}
+
+// Fprint is a replacement for fmt.Fprint, which accepts an ansiColor as the first argument.
+func Fprint(output io.Writer, col ansiColor, s ...any) {
+	fmt.Fprintf(output, "\033[0;%dm", col.value)
+	if col.bold {
+		fmt.Fprint(output, "\033[1m")
+	}
+	fmt.Fprint(output, s...)
+	applySettings()
+}
+
+// Fprintln is a replacement for fmt.Fprintln, which accepts an ansiColor as the first argument.
+func Fprintln(output io.Writer, col ansiColor, s ...any) {
+	fmt.Fprintf(output, "\033[0;%dm", col.value)
+	if col.bold {
+		fmt.Fprintf(output, "\033[1m")
+	}
+	fmt.Fprintln(output, s...)
+	applySettings()
+}
+
+// Fprintf is a replacement for fmt.Fprintf, which accepts an ansiColor as the first argument.
+func Fprintf(output io.Writer, col ansiColor, s string, args ...any) {
+	fmt.Fprintf(output, "\033[0;%dm", col.value)
+	if col.bold {
+		fmt.Fprintf(output, "\033[1m")
+	}
+	fmt.Fprintf(output, s, args...)
 	applySettings()
 }
