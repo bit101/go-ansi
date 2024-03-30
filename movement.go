@@ -104,3 +104,13 @@ func TermSize() (int, int) {
 	x, y, _ := term.GetSize(0)
 	return x, y
 }
+
+// HideCursor hides the cursor
+func HideCursor() {
+	fmt.Print("\033[?25l")
+}
+
+// ShowCursor shows the cursor
+func ShowCursor() {
+	fmt.Print("\033[?25h")
+}
