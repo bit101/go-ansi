@@ -6,59 +6,59 @@ import (
 	"io"
 )
 
-type ansiColor struct {
+type AnsiColor struct {
 	bold  bool
 	value int
 }
 
 var (
 	// Black sets the ansi color black.
-	Black = ansiColor{false, 30}
+	Black = AnsiColor{false, 30}
 	// BoldBlack sets the ansi color black and bold.
-	BoldBlack = ansiColor{true, 30}
+	BoldBlack = AnsiColor{true, 30}
 	// Red sets the ansi color red.
-	Red = ansiColor{false, 31}
+	Red = AnsiColor{false, 31}
 	// BoldRed sets the ansi color red and bold.
-	BoldRed = ansiColor{true, 31}
+	BoldRed = AnsiColor{true, 31}
 	// Green sets the ansi color green.
-	Green = ansiColor{false, 32}
+	Green = AnsiColor{false, 32}
 	// BoldGreen sets the ansi color green and bold.
-	BoldGreen = ansiColor{true, 32}
+	BoldGreen = AnsiColor{true, 32}
 	// Yellow sets the ansi color yellow.
-	Yellow = ansiColor{false, 33}
+	Yellow = AnsiColor{false, 33}
 	// BoldYellow sets the ansi color yellow and bold.
-	BoldYellow = ansiColor{true, 33}
+	BoldYellow = AnsiColor{true, 33}
 	// Blue sets the ansi color blue.
-	Blue = ansiColor{false, 34}
+	Blue = AnsiColor{false, 34}
 	// BoldBlue sets the ansi color blue and bold.
-	BoldBlue = ansiColor{true, 34}
+	BoldBlue = AnsiColor{true, 34}
 	// Purple sets the ansi color purple.
-	Purple = ansiColor{false, 35}
+	Purple = AnsiColor{false, 35}
 	// BoldPurple sets the ansi color purple and bold.
-	BoldPurple = ansiColor{true, 35}
+	BoldPurple = AnsiColor{true, 35}
 	// Cyan sets the ansi color cyan.
-	Cyan = ansiColor{false, 36}
+	Cyan = AnsiColor{false, 36}
 	// BoldCyan sets the ansi color cyan and bold.
-	BoldCyan = ansiColor{true, 36}
+	BoldCyan = AnsiColor{true, 36}
 	// White sets the ansi color white.
-	White = ansiColor{false, 37}
+	White = AnsiColor{false, 37}
 	// BoldWhite sets the ansi color white and bold.
-	BoldWhite = ansiColor{true, 37}
+	BoldWhite = AnsiColor{true, 37}
 	// Default sets the ansi color to the default color.
-	Default = ansiColor{false, 39}
+	Default = AnsiColor{false, 39}
 
 	// Bold sets the text to be bold.
-	Bold = ansiColor{false, 1}
+	Bold = AnsiColor{false, 1}
 	// NotBold sets the text to be not bold.
-	NotBold = ansiColor{false, 22}
+	NotBold = AnsiColor{false, 22}
 	// Underline sets the text to be underlined.
-	Underline = ansiColor{false, 4}
+	Underline = AnsiColor{false, 4}
 	// NotUnderline sets the text to be not underlined.
-	NotUnderline = ansiColor{false, 24}
+	NotUnderline = AnsiColor{false, 24}
 	// Reversed sets the text to be reversed.
-	Reversed = ansiColor{false, 7}
+	Reversed = AnsiColor{false, 7}
 	// NotReversed sets the text to be not reversed.
-	NotReversed = ansiColor{false, 27}
+	NotReversed = AnsiColor{false, 27}
 )
 
 var (
@@ -70,7 +70,7 @@ var (
 )
 
 // SetFg sets the foreground text color.
-func SetFg(fg ansiColor) {
+func SetFg(fg AnsiColor) {
 	fgColor = fg
 	if fg.bold {
 		isBold = true
@@ -79,7 +79,7 @@ func SetFg(fg ansiColor) {
 }
 
 // SetBg sets the background text color.
-func SetBg(bg ansiColor) {
+func SetBg(bg AnsiColor) {
 	bgColor = bg
 	applySettings()
 }
@@ -103,7 +103,7 @@ func SetReversed(reversed bool) {
 }
 
 // SetAll sets the foreground, background, bold, underline and reversed properties at once.
-func SetAll(fg, bg ansiColor, bold, underline, reversed bool) {
+func SetAll(fg, bg AnsiColor, bold, underline, reversed bool) {
 	fgColor = fg
 	bgColor = bg
 	isBold = bold
@@ -134,8 +134,8 @@ func applySettings() {
 	fmt.Printf("\033[0;%d;%d;%d;%d;%dm", fgColor.value, bgColor.value+10, b, u, r)
 }
 
-// Print is a replacement for fmt.Print, which accepts an ansiColor as the first argument.
-func Print(col ansiColor, s ...any) {
+// Print is a replacement for fmt.Print, which accepts an AnsiColor as the first argument.
+func Print(col AnsiColor, s ...any) {
 	fmt.Printf("\033[0;%dm", col.value)
 	if col.bold {
 		fmt.Printf("\033[1m")
@@ -144,8 +144,8 @@ func Print(col ansiColor, s ...any) {
 	applySettings()
 }
 
-// Println is a replacement for fmt.Println, which accepts an ansiColor as the first argument.
-func Println(col ansiColor, s ...any) {
+// Println is a replacement for fmt.Println, which accepts an AnsiColor as the first argument.
+func Println(col AnsiColor, s ...any) {
 	fmt.Printf("\033[0;%dm", col.value)
 	if col.bold {
 		fmt.Printf("\033[1m")
@@ -154,8 +154,8 @@ func Println(col ansiColor, s ...any) {
 	applySettings()
 }
 
-// Printf is a replacement for fmt.Printf, which accepts an ansiColor as the first argument.
-func Printf(col ansiColor, s string, args ...any) {
+// Printf is a replacement for fmt.Printf, which accepts an AnsiColor as the first argument.
+func Printf(col AnsiColor, s string, args ...any) {
 	fmt.Printf("\033[0;%dm", col.value)
 	if col.bold {
 		fmt.Printf("\033[1m")
@@ -164,8 +164,8 @@ func Printf(col ansiColor, s string, args ...any) {
 	applySettings()
 }
 
-// Fprint is a replacement for fmt.Fprint, which accepts an ansiColor as the first argument.
-func Fprint(output io.Writer, col ansiColor, s ...any) {
+// Fprint is a replacement for fmt.Fprint, which accepts an AnsiColor as the first argument.
+func Fprint(output io.Writer, col AnsiColor, s ...any) {
 	fmt.Fprintf(output, "\033[0;%dm", col.value)
 	if col.bold {
 		fmt.Fprint(output, "\033[1m")
@@ -174,8 +174,8 @@ func Fprint(output io.Writer, col ansiColor, s ...any) {
 	applySettings()
 }
 
-// Fprintln is a replacement for fmt.Fprintln, which accepts an ansiColor as the first argument.
-func Fprintln(output io.Writer, col ansiColor, s ...any) {
+// Fprintln is a replacement for fmt.Fprintln, which accepts an AnsiColor as the first argument.
+func Fprintln(output io.Writer, col AnsiColor, s ...any) {
 	fmt.Fprintf(output, "\033[0;%dm", col.value)
 	if col.bold {
 		fmt.Fprintf(output, "\033[1m")
@@ -184,8 +184,8 @@ func Fprintln(output io.Writer, col ansiColor, s ...any) {
 	applySettings()
 }
 
-// Fprintf is a replacement for fmt.Fprintf, which accepts an ansiColor as the first argument.
-func Fprintf(output io.Writer, col ansiColor, s string, args ...any) {
+// Fprintf is a replacement for fmt.Fprintf, which accepts an AnsiColor as the first argument.
+func Fprintf(output io.Writer, col AnsiColor, s string, args ...any) {
 	fmt.Fprintf(output, "\033[0;%dm", col.value)
 	if col.bold {
 		fmt.Fprintf(output, "\033[1m")

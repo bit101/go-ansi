@@ -20,7 +20,7 @@ import "github.com/bit101/go-ansi"
 ### Set foreground (text) color
 
 ```
-ansi.SetFg(fg ansiColor) // see below for `ansiColor` type
+ansi.SetFg(fg AnsiColor) // see below for `AnsiColor` type
 ```
 
 Affects the color of all text rendered with `fmt.Print*` functions. This color will remain active until it is changed or reset.
@@ -28,7 +28,7 @@ Affects the color of all text rendered with `fmt.Print*` functions. This color w
 ### Set background color
 
 ```
-ansi.SetBg(bg ansiColor) // see below for `ansiColor` type
+ansi.SetBg(bg AnsiColor) // see below for `AnsiColor` type
 ```
 
 Affects the background color of all text rendered with `fmt.Print*` functions. This color will remain active until it is changed or reset.
@@ -60,7 +60,7 @@ Affects whether text will be rendered with foreground and background reversed. T
 ### Set all properties
 
 ```
-ansi.SetAll(fg ansiColor, bg ansiColor, bold bool, underline bool, reversed bool)
+ansi.SetAll(fg AnsiColor, bg AnsiColor, bold bool, underline bool, reversed bool)
 ```
 
 Sets all of the above properties in one shot.
@@ -88,43 +88,43 @@ Setting the background color is not supported with these methods.
 ### Print
 
 ```
-ansi.Print(color ansiColor, message ...any)
+ansi.Print(color AnsiColor, message ...any)
 ```
 
-Behaves exactly like `fmt.Print` but takes an `ansiColor` as a first argument.
+Behaves exactly like `fmt.Print` but takes an `AnsiColor` as a first argument.
 
 ### Print line
 
 ```
-ansi.Println(color ansiColor, message ...any)
+ansi.Println(color AnsiColor, message ...any)
 ```
 
-Behaves exactly like `fmt.Println` but takes an `ansiColor` as a first argument.
+Behaves exactly like `fmt.Println` but takes an `AnsiColor` as a first argument.
 
 ### Print formatted
 
 ```
-ansi.Printf(color ansiColor, formatStr string, args ...any)
+ansi.Printf(color AnsiColor, formatStr string, args ...any)
 ```
 
-Behaves exactly like `fmt.Printf` but takes an `ansiColor` as a first argument.
+Behaves exactly like `fmt.Printf` but takes an `AnsiColor` as a first argument.
 
 ### Fprint functions
 ```
-ansi.Fprint(output io.Writer, color ansiColor, message ...any)
-ansi.Fprintln(output io.Writer, color ansiColor, message ...any)
-ansi.Fprintf(output io.Writer, color ansiColor, formatStr string, args ...any)
+ansi.Fprint(output io.Writer, color AnsiColor, message ...any)
+ansi.Fprintln(output io.Writer, color AnsiColor, message ...any)
+ansi.Fprintf(output io.Writer, color AnsiColor, formatStr string, args ...any)
 ```
 
 Exactly like the other print functions, but print to the `io.Writer` of your choice.
 
-## The ansiColor type
+## The AnsiColor type
 
-`ansiColor`s are a set of predefined values that encapsule text properties - mostly colors.
+`AnsiColor`s are a set of predefined values that encapsule text properties - mostly colors.
 
 ### Colors
 
-The following `ansiColor`s define actual colors. They can be used in `ansi.SetFg`, `ansi.SetBg` or any of the `ansi.Print*` functions:
+The following `AnsiColor`s define actual colors. They can be used in `ansi.SetFg`, `ansi.SetBg` or any of the `ansi.Print*` functions:
 
 ```
 ansi.Black
